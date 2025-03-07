@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2025 at 02:56 AM
+-- Generation Time: Mar 07, 2025 at 07:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,8 +39,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `item_id`, `quantity`) VALUES
-(23, 6, 2, 1),
-(34, 1, 5, 1);
+(23, 6, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -65,7 +64,7 @@ INSERT INTO `gcash_accounts` (`account_id`, `account_number`, `account_name`, `b
 (3, '09191234569', 'Alice Johnson', 750.50),
 (4, '09201234570', 'Bob Brown', 300.00),
 (5, '09211234571', 'Charlie Davis', 1200.75),
-(6, '09920993829', 'Allan Monforte', 9999989.00);
+(6, '09920993829', 'Allan Monforte', 9999890.00);
 
 -- --------------------------------------------------------
 
@@ -146,13 +145,13 @@ INSERT INTO `orders` (`order_id`, `user_id`, `total_price`, `order_date`, `statu
 ('ORDER_67b7d6337e1f40.69251557', 1, 29.93, '2025-02-21 01:26:11', 'Pending'),
 ('ORDER_67b7dae517d179.85585574', 2, 7.50, '2025-02-21 01:46:13', 'Pending'),
 ('ORDER_67b7ec30719de5.72521993', 2, 5.99, '2025-02-21 03:00:00', 'Pending'),
-('ORDER_67b7f757b5d2b3.79201193', 5, 5.99, '2025-02-21 03:47:35', 'Pending'),
 ('ORDER_67c1352adf30c4.98216851', 6, 11.96, '2025-02-28 04:01:46', 'Pending'),
 ('ORDER_67c42aefd3ff28.57286805', 1, 1.50, '2025-03-02 09:54:55', 'Pending'),
 ('ORDER_67c43802b22438.44873278', 1, 5.99, '2025-03-02 10:50:42', 'Canceled'),
 ('ORDER_67c43a8026f036.63167700', 1, 5.99, '2025-03-02 11:01:20', 'Canceled'),
 ('ORDER_67ca47aa5c042', 1, 19.92, '2025-03-07 01:11:06', 'Pending'),
-('ORDER_67ca47dfa2a11', 1, 20.93, '2025-03-07 01:11:59', 'Canceled');
+('ORDER_67ca47dfa2a11', 1, 20.93, '2025-03-07 01:11:59', 'Canceled'),
+('ORDER_67ca8a9a1f1cb', 1, 2.99, '2025-03-07 05:56:42', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -181,7 +180,8 @@ INSERT INTO `order_details` (`order_detail_id`, `order_id`, `item_id`, `quantity
 (5, 'ORDER_67b7d49e4e5f71.05682525', 1, 1, 5.99, 5.99),
 (6, 'ORDER_67b7d49e4e5f71.05682525', 5, 1, 1.50, 1.50),
 (7, 'ORDER_67ca47aa5c042', 5, 8, 19.92, 2.49),
-(8, 'ORDER_67ca47dfa2a11', 2, 7, 20.93, 2.99);
+(8, 'ORDER_67ca47dfa2a11', 2, 7, 20.93, 2.99),
+(9, 'ORDER_67ca8a9a1f1cb', 2, 1, 2.99, 2.99);
 
 -- --------------------------------------------------------
 
@@ -212,7 +212,6 @@ INSERT INTO `payments` (`payment_id`, `order_id`, `user_id`, `amount`, `payment_
 (11, 'ORDER_67b7d6337e1f40.69251557', 1, 29.93, 'balance', 'completed', '2025-02-21 01:26:11'),
 (12, 'ORDER_67b7dae517d179.85585574', 2, 7.50, 'balance', 'completed', '2025-02-21 01:46:13'),
 (13, 'ORDER_67b7ec30719de5.72521993', 2, 5.99, 'balance', 'completed', '2025-02-21 03:00:00'),
-(14, 'ORDER_67b7f757b5d2b3.79201193', 5, 5.99, 'balance', 'completed', '2025-02-21 03:47:35'),
 (15, 'ORDER_67c1352adf30c4.98216851', 6, 11.96, '', 'completed', '2025-02-28 04:01:46'),
 (16, 'ORDER_67c42aefd3ff28.57286805', 1, 1.50, 'gcash', 'completed', '2025-03-02 09:54:55'),
 (17, 'ORDER_67c43802b22438.44873278', 1, 5.99, 'balance', 'completed', '2025-03-02 10:50:42'),
@@ -255,22 +254,20 @@ CREATE TABLE `users` (
   `balance` decimal(10,2) DEFAULT 0.00,
   `phone` varchar(15) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT 'images/default-profile.jpg',
-  `gcash_number` varchar(15) DEFAULT NULL
+  `image_path` varchar(255) DEFAULT 'images/default-profile.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `role`, `balance`, `phone`, `address`, `image_path`, `gcash_number`) VALUES
-(1, 'Allan Monforte', 'allanmonforte@gmail.com', '$2y$10$j2Xm9vb2YSUD310EVE.ghuUyudfpgNF8E6QrNTamqhHvv/OBlVFdm', 'Student', 13401.18, '09686827403', '285 PNR Site, Western Bicutan Taguig City, Western Bicutan', 'images/profiles/67b71f8628b2f_RobloxScreenShot20250219_220845337.png', NULL),
-(2, 'EGAYy', 'ego123123@gmail.net', '$2y$10$jTeazZ6pzHdI2d5dSxkIdu65pLFLM7xpyR6mmExVIcrb1vSdoxgVq', 'Student', 99999999.99, '6969', 'gayland', 'images/default-profile.jpg', NULL),
-(3, 'Melvin', 'melvin1234@gmail.com', '$2y$10$3sdO.wGghgce/3n6jipIh.syBETL7VagujIPjIKXiUFh7inGO6DpK', 'Student', 0.00, NULL, NULL, 'images/default-profile.jpg', NULL),
-(4, 'zcdasad@gasfsas.coaj', '123123@gmail.com', '$2y$10$.7F2Ud.lXqib.uNErYlc1uVy162S.7KKxeB64PyORXj8sHhBx5aTq', 'Student', 0.00, NULL, NULL, 'images/default-profile.jpg', NULL),
-(5, 'allan monforte porto', 'allan123@gmail.com', '$2y$10$CUxcH8PsjnM8YZ.CL7.0E.r7MJQn7IdTM.H86G5/B./jGrv5X4/g.', 'Student', 999993.01, NULL, NULL, 'images/default-profile.jpg', NULL),
-(6, 'egoian', 'ego123@gmail.com', '$2y$10$v7CN02fZjTAVgoheVDzBWOiHtbnsTRbxZGJHyp/v7mf4seTHKKWSy', 'Student', 0.00, NULL, NULL, 'images/default-profile.jpg', NULL),
-(7, 'egoego123', 'ego123123123@gmail.com', '$2y$10$hhh3B7FizI7.VqRDV4vgcuraBJF/8XuR88mo.qe0kkFhcvEXRYxIy', 'Admin', 0.00, NULL, NULL, 'images/default-profile.jpg', NULL);
+INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `role`, `balance`, `phone`, `address`, `image_path`) VALUES
+(1, 'Allan Monforte', 'allanmonforte@gmail.com', '$2y$10$HSlXsHwcJO5u/jG0joxEKuG.Y7IppSPuL8HbHGonzqCL2isgHgDmy', 'Student', 13497.19, '09686827403', '285 PNR Site, Western Bicutan Taguig City, Western Bicutan', 'images/profiles/cute-cat-eyes-profile-picture-uq3edzmg1guze2hh.jpg'),
+(2, 'EGAYy', 'ego123123@gmail.net', '$2y$10$jTeazZ6pzHdI2d5dSxkIdu65pLFLM7xpyR6mmExVIcrb1vSdoxgVq', 'Retailer', 99999999.99, '6969', 'gayland', 'images/default-profile.jpg'),
+(3, 'Melvin', 'melvin1234@gmail.com', '$2y$10$3sdO.wGghgce/3n6jipIh.syBETL7VagujIPjIKXiUFh7inGO6DpK', 'Student', 0.00, NULL, NULL, 'images/default-profile.jpg'),
+(4, 'zcdasad@gasfsas.coaj', '123123@gmail.com', '$2y$10$.7F2Ud.lXqib.uNErYlc1uVy162S.7KKxeB64PyORXj8sHhBx5aTq', 'Student', 0.00, NULL, NULL, 'images/default-profile.jpg'),
+(6, 'egoian', 'ego123@gmail.com', '$2y$10$v7CN02fZjTAVgoheVDzBWOiHtbnsTRbxZGJHyp/v7mf4seTHKKWSy', 'Student', 0.00, NULL, NULL, 'images/default-profile.jpg'),
+(7, 'egoego123', 'ego123123123@gmail.com', '$2y$10$hhh3B7FizI7.VqRDV4vgcuraBJF/8XuR88mo.qe0kkFhcvEXRYxIy', 'Admin', 0.00, NULL, NULL, 'images/default-profile.jpg');
 
 --
 -- Indexes for dumped tables
@@ -348,7 +345,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `gcash_accounts`
@@ -372,7 +369,7 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `payments`
